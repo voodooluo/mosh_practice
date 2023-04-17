@@ -1,41 +1,77 @@
 import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './index.css';
 import ListComponent from "./components/ListComponent";
 import Alert from "./components/Alert";
-import Button from "./components/Button";
+import Button from "./components/Button/Button";
+import Like from "./components/Like";
+import Game from "./components/Game";
+import Form from "./components/Form";
+import ExpenseList from "./components/ExpenseList";
+
+
+// const expenseList = [
+//     {
+//         id: 1,
+//         description: 'milk',
+//         amount: 5,
+//         category: "Groceries"
+//     }, {
+//         id: 2,
+//         description: 'gas',
+//         amount: 35,
+//         category: "Utilities"
+//     }, {
+//         id: 3,
+//         description: 'movie',
+//         amount: 45,
+//         category: "Entertainment"
+//     }, {
+//         id: 4,
+//         description: 'eggs',
+//         amount: 55,
+//         category: "Groceries"
+//     },
+//
+// ]
 
 function App() {
-    const items = [
-        'new york',
-        'beijing',
-        'Melbourne',
-        'Sydney'
-    ];
 
-    // const heading="test123";
-    const handleSelectedItem = (item: string) => {
-        console.log(item);
+    const [expenseList, setExpenseList] = useState([
+            {
+                id: 1,
+                description: 'milk',
+                amount: 5,
+                category: "Groceries"
+            }, {
+                id: 2,
+                description: 'gas',
+                amount: 35,
+                category: "Utilities"
+            }, {
+                id: 3,
+                description: 'movie',
+                amount: 45,
+                category: "Entertainment"
+            }, {
+                id: 4,
+                description: 'eggs',
+                amount: 55,
+                category: "Groceries"
+            },
 
-    }
+        ]
+    )
+    let sum = 0;
+    expenseList.map(e => sum += e.amount);
 
-    const [showAlert,setShowAlert]=useState(false);
-
-
-    const click = () => {
-        console.log(showAlert);
-        setShowAlert(!showAlert);
-
-    };
     return (
-        <div>
-            <Button title='test button' onClick={click}  />
-            {showAlert? <Alert onClick={click}>test Alert</Alert> : null}
+        <>
+            <Form expenseList={expenseList} setExpenseList={setExpenseList}></Form>
+            <ExpenseList expenseList={expenseList} setExpenseList={setExpenseList} total={sum}/>
+        </>
 
-            {/*<ListComponent items={items} heading='test 123342342'*/}
-            {/*               onSelectedItem={handleSelectedItem}*/}
-            {/*></ListComponent>*/}
-        </div>
     );
 }
 
